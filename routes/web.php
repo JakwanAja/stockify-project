@@ -11,9 +11,8 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 // Admin routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
-
+    Route::resource('suppliers', App\Http\Controllers\Admin\SupplierController::class);
 });
 
 // Manager routes
