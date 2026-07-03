@@ -14,19 +14,19 @@ class UserSeeder extends Seeder
             [
                 'name'       => 'Administrator',
                 'email'      => 'admin@stockify.com',
-                'password'   => Hash::make('password'),
+                'password'   => Hash::make('admin123'),
                 'role'       => 'Admin',
             ],
             [
                 'name'       => 'Manajer Gudang',
                 'email'      => 'manager@stockify.com',
-                'password'   => Hash::make('password'),
+                'password'   => Hash::make('12345678'),
                 'role'       => 'Manajer Gudang',
             ],
             [
                 'name'       => 'Staff Gudang',
                 'email'      => 'staff@stockify.com',
-                'password'   => Hash::make('password'),
+                'password'   => Hash::make('12345678'),
                 'role'       => 'Staff Gudang',
             ],
         ]);

@@ -1,13 +1,22 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard Staff')
+@section('title', 'Dashboard')
+@section('page-title', 'Dashboard')
+@section('page-subtitle', 'Selamat datang kembali, ' . Auth::user()->name)
 
 @section('sidebar')
-    <p class="text-xs font-semibold text-gray-400 uppercase mb-3">Menu Staff</p>
-    <a href="{{ route('staff.dashboard') }}" class="block py-2 px-3 rounded-lg text-sm text-blue-600 bg-blue-50 font-medium">Dashboard</a>
+    @include('components.sidebar-staff')
 @endsection
 
 @section('content')
-    <h2 class="text-2xl font-bold text-gray-800 mb-2">Dashboard Staff Gudang</h2>
-    <p class="text-gray-500 text-sm">Selamat datang, {{ Auth::user()->name }}. Phase 1 berhasil! ✅</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <p class="text-sm text-gray-500">Barang Masuk Pending</p>
+            <p class="text-3xl font-bold text-gray-900 mt-1">—</p>
+        </div>
+        <div class="bg-white rounded-xl border border-gray-200 p-5">
+            <p class="text-sm text-gray-500">Barang Keluar Pending</p>
+            <p class="text-3xl font-bold text-gray-900 mt-1">—</p>
+        </div>
+    </div>
 @endsection

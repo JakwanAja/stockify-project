@@ -21,7 +21,7 @@
         {{-- Logo & Tagline --}}
         <div class="relative z-10 flex flex-col items-center text-center">
             <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
-                <img src="{{ asset('images/stockify_logo.png') }}" alt="Stockify Logo" class="w-80 drop-shadow-xl">
+                <img src="{{ asset('images/logo.svg') }}" alt="Stockify Logo" class="w-80 drop-shadow-xl">
             </div>
         </div>
     </section>
@@ -66,7 +66,7 @@
                         id="email"
                         name="email"
                         value="{{ old('email') }}"
-                        placeholder="email@stockify.com"
+                        placeholder="masukan email anda"
                         autocomplete="email"
                         class="w-full px-4 py-2.5 text-sm text-slate-800 bg-slate-50 border border-slate-200 rounded-lg outline-none transition focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 @error('email') border-red-400 bg-red-50 @enderror"
                     >
