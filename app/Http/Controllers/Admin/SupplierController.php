@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Services\Admin\SupplierService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class SupplierController extends Controller
 {
@@ -18,14 +19,15 @@ class SupplierController extends Controller
         return view('admin.suppliers.index', compact('suppliers'));
     }
 
+    // Tidak diperlukan lagi, redirect ke index
     public function create()
     {
-        return view('admin.suppliers.create');
+        return redirect()->route('admin.suppliers.index');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name'    => 'required|string|max:45|unique:suppliers,name',
             'address' => 'nullable|string',
             'phone'   => 'nullable|string|max:15',
@@ -39,34 +41,41 @@ class SupplierController extends Controller
             'email.unique'  => 'Email supplier sudah terdaftar.',
         ]);
 
+        if ($validator->fails()) {
+            return redirect()->route('admin.suppliers.index')
+                ->withErrors($validator)
+                ->withInput();
+            // Tidak flash edit_mode → blade buka modal CREATE
+        }
+
         $this->service->createSupplier($request->all());
 
         return redirect()->route('admin.suppliers.index')
             ->with('success', 'Supplier berhasil ditambahkan.');
     }
 
+    // Tidak diperlukan lagi, redirect ke index
     public function edit(int $id)
     {
-        $supplier = $this->service->getSupplierById($id);
-        return view('admin.suppliers.edit', compact('supplier'));
+        return redirect()->route('admin.suppliers.index');
     }
 
     public function update(Request $request, int $id)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name'    => 'required|string|max:45|unique:suppliers,name,' . $id,
-            'address' => 'required|string',
+            'address' => 'nullable|string',
             'phone'   => 'nullable|string|max:15',
             'email'   => 'nullable|email|max:45|unique:suppliers,email,' . $id,
         ], [
-            'name.required' => 'Nama supplier wajib diisi.',
-            'address.required' => 'Alamat supplier wajib diisi.',
-            'name.unique'   => 'Nama supplier sudah terdaftar.',
-            'name.max'      => 'Nama supplier maksimal 45 karakter.',
-            'phone.max'     => 'Nomor telepon maksimal 15 karakter.',
-            'email.email'   => 'Format email tidak valid.',
-            'email.unique'  => 'Email supplier sudah terdaftar.',
+            'name.required'    => 'Nama supplier wajib diisi.',
+            'name.unique'      => 'Nama supplier sudah terdaftar.',
+            'name.max'         => 'Nama supplier maksimal 45 karakter.',
+            'phone.max'        => 'Nomor telepon maksimal 15 karakter.',
+            'email.email'      => 'Format email tidak valid.',
+            'email.unique'     => 'Email supplier sudah terdaftar.',
         ]);
+
 
         $this->service->updateSupplier($id, $request->all());
 

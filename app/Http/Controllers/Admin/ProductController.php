@@ -14,8 +14,10 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = $this->service->getAllProducts();
-        return view('admin.products.index', compact('products'));
+        $products   = $this->service->getAllProducts();
+        $categories = $this->service->getAllCategories();
+        $suppliers  = $this->service->getAllSuppliers();
+        return view('admin.products.index', compact('products', 'categories', 'suppliers'));
     }
 
     public function create()
