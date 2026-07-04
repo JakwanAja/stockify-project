@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login — Stockify</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="min-h-screen flex">
 
@@ -21,7 +22,7 @@
         {{-- Logo & Tagline --}}
         <div class="relative z-10 flex flex-col items-center text-center">
             <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
-                <img src="{{ asset('images/logo.svg') }}" alt="Stockify Logo" class="w-80 drop-shadow-xl">
+                <img src="{{ asset('images/stockify_logo.png') }}" alt="Stockify Logo" class="w-80 drop-shadow-xl">
             </div>
         </div>
     </section>
@@ -108,6 +109,14 @@
                         class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
                     >
                     <label for="remember" class="ml-2 text-sm text-slate-600">Ingat Saya</label>
+                </div>
+
+                {{-- reCAPTCHA --}}
+                <div class="mb-6">
+                    <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+                    @error('g-recaptcha-response')
+                        <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 {{-- Submit --}}

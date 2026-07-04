@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-//use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Routing\Controller;
 
 class LoginController extends Controller
@@ -20,10 +20,29 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
-            'email'    => ['required', 'email'],
-            'password' => ['required'],
+        // Validasi input + reCAPTCHA
+        $request->validate([
+            'email'                 => ['required', 'email'],
+            'password'              => ['required'],
+            'g-recaptcha-response'  => ['required', function ($attribute, $value, $fail) {
+                $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                    'secret'   => config('services.recaptcha.secret_key'),
+                    'response' => $value,
+                    'remoteip' => request()->ip(),
+                ]);
+
+                if (!$response->json('success')) {
+                    $fail('Verifikasi reCAPTCHA gagal. Silakan coba lagi.');
+                }
+            }],
+        ], [
+            'email.required'                => 'Email wajib diisi.',
+            'email.email'                   => 'Format email tidak valid.',
+            'password.required'             => 'Password wajib diisi.',
+            'g-recaptcha-response.required' => 'Harap centang reCAPTCHA terlebih dahulu.',
         ]);
+
+        $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
