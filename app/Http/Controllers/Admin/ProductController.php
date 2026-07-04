@@ -68,21 +68,25 @@ class ProductController extends Controller
         $product    = $this->service->getProductById($id);
         $categories = $this->service->getAllCategories();
         $suppliers  = $this->service->getAllSuppliers();
-        return view('admin.products.edit', compact('product', 'categories', 'suppliers'));
+        $attributes = $this->service->getProductAttributes($id);
+        return view('admin.products.edit', compact('product', 'categories', 'suppliers', 'attributes'));
     }
-
+    
     public function update(Request $request, int $id)
     {
         $request->validate([
-            'category_id'    => 'required|exists:categories,id',
-            'supplier_id'    => 'required|exists:suppliers,id',
-            'name'           => 'required|string|max:45',
-            'sku'            => 'required|string|max:45|unique:products,sku,' . $id,
-            'description'    => 'nullable|string',
-            'purchase_price' => 'required|numeric|min:0',
-            'selling_price'  => 'required|numeric|min:0',
-            'minimum_stock'  => 'required|integer|min:0',
-            'image'          => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'category_id'      => 'required|exists:categories,id',
+            'supplier_id'      => 'required|exists:suppliers,id',
+            'name'             => 'required|string|max:45',
+            'sku'              => 'required|string|max:45|unique:products,sku,' . $id,
+            'description'      => 'nullable|string',
+            'purchase_price'   => 'required|numeric|min:0',
+            'selling_price'    => 'required|numeric|min:0',
+            'minimum_stock'    => 'required|integer|min:0',
+            'image'            => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'attributes'       => 'nullable|array',
+            'attributes.*.name'  => 'required_with:attributes.*.value|string|max:45',
+            'attributes.*.value' => 'required_with:attributes.*.name|string|max:45',
         ], [
             'category_id.required'    => 'Kategori wajib dipilih.',
             'supplier_id.required'    => 'Supplier wajib dipilih.',
@@ -96,10 +100,15 @@ class ProductController extends Controller
             'image.mimes'             => 'Format gambar: jpg, jpeg, png, webp.',
             'image.max'               => 'Ukuran gambar maksimal 2MB.',
         ]);
-
-        $this->service->updateProduct($id, $request->all(), $request->file('image'));
-
-        return redirect()->route('admin.products.index')
+    
+        $this->service->updateProduct(
+            $id,
+            $request->all(),
+            $request->file('image'),
+            $request->input('attributes', [])
+        );
+    
+        return redirect()->route('admin.products.edit', $id)
             ->with('success', 'Produk berhasil diperbarui.');
     }
 

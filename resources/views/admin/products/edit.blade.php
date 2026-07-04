@@ -150,7 +150,47 @@
                 <input type="file" id="image" name="image" accept="image/*" class="hidden" onchange="previewImage(this)">
                 @error('image') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
             </div>
+            <div class="mb-6">
+                <div class="flex items-center justify-between mb-3">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-800">Atribut Produk</h3>
+                        <p class="text-xs text-gray-400 mt-0.5">Contoh: Warna → Merah, Ukuran → XL</p>
+                    </div>
+                    <button type="button" onclick="addAttribute()"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        Tambah Atribut
+                    </button>
+                </div>
 
+                <div id="attributes-container" class="space-y-2">
+                    {{-- Atribut existing dari database --}}
+                    @foreach($attributes as $attr)
+                        <div class="flex items-center gap-2 attribute-row">
+                            <input type="text" name="attributes[{{ $loop->index }}][name]"
+                                value="{{ $attr->name }}"
+                                placeholder="Nama (contoh: Warna)"
+                                class="flex-1 px-3 py-2 text-sm border border-gray-200 bg-slate-50 rounded-lg outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition">
+                            <input type="text" name="attributes[{{ $loop->index }}][value]"
+                                value="{{ $attr->value }}"
+                                placeholder="Nilai (contoh: Merah)"
+                                class="flex-1 px-3 py-2 text-sm border border-gray-200 bg-slate-50 rounded-lg outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition">
+                            <button type="button" onclick="removeAttribute(this)"
+                                    class="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition flex-shrink-0">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                    @endforeach
+                </div>
+                <div id="attributes-empty"
+                    class="{{ $attributes->count() > 0 ? 'hidden' : '' }} mt-3 p-4 border border-dashed border-gray-200 rounded-lg text-center">
+                    <p class="text-xs text-gray-400">Belum ada atribut. Klik "Tambah Atribut" untuk menambahkan.</p>
+                </div>
+            </div>
             {{-- Actions --}}
             <div class="flex items-center gap-3">
                 <button type="submit"
@@ -168,18 +208,56 @@
 </div>
 
 <script>
-function previewImage(input) {
-    const preview = document.getElementById('image-preview');
-    const wrapper = document.getElementById('image-preview-wrapper');
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            preview.src = e.target.result;
-            preview.classList.remove('hidden');
-            wrapper.classList.add('hidden');
-        };
-        reader.readAsDataURL(input.files[0]);
+    function previewImage(input) {
+        const preview = document.getElementById('image-preview');
+        const wrapper = document.getElementById('image-preview-wrapper');
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+                wrapper.classList.add('hidden');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
     }
-}
-</script>
+    
+    let attrIndex = {{ $attributes->count() }};
+    
+    function addAttribute() {
+        const container = document.getElementById('attributes-container');
+        const empty     = document.getElementById('attributes-empty');
+    
+        const row = document.createElement('div');
+        row.className = 'flex items-center gap-2 attribute-row';
+        row.innerHTML = `
+            <input type="text" name="attributes[${attrIndex}][name]"
+                   placeholder="Nama (contoh: Ukuran)"
+                   class="flex-1 px-3 py-2 text-sm border border-gray-200 bg-slate-50 rounded-lg outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition">
+            <input type="text" name="attributes[${attrIndex}][value]"
+                   placeholder="Nilai (contoh: XL)"
+                   class="flex-1 px-3 py-2 text-sm border border-gray-200 bg-slate-50 rounded-lg outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition">
+            <button type="button" onclick="removeAttribute(this)"
+                    class="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition flex-shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        `;
+    
+        container.appendChild(row);
+        empty.classList.add('hidden');
+        attrIndex++;
+    }
+    
+    function removeAttribute(btn) {
+        const row       = btn.closest('.attribute-row');
+        const container = document.getElementById('attributes-container');
+        row.remove();
+    
+        if (container.querySelectorAll('.attribute-row').length === 0) {
+            document.getElementById('attributes-empty').classList.remove('hidden');
+        }
+    }
+    </script>
 @endsection
