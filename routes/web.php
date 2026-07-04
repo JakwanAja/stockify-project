@@ -13,6 +13,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('suppliers', App\Http\Controllers\Admin\SupplierController::class);
+    Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
 });
 
 // Manager routes

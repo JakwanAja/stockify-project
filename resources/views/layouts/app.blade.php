@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Stockify') - Stockify</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @include('components.modal-confirm-delete')
 </head>
 <body class="bg-gray-50 antialiased h-full">
     <div class="flex h-screen overflow-hidden">
