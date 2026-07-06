@@ -13,6 +13,8 @@ use App\Repositories\Interfaces\ProductAttributeRepositoryInterface;
 use App\Repositories\Eloquent\ProductAttributeRepository;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\Eloquent\UserRepository;
+use App\Repositories\Interfaces\StockTransactionRepositoryInterface;
+use App\Repositories\Eloquent\StockTransactionRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(ProductAttributeRepositoryInterface::class, ProductAttributeRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(StockTransactionRepositoryInterface::class, StockTransactionRepository::class);
+
+        $this->app->singleton(\App\Services\StockService::class);
     }
 
     public function boot(): void

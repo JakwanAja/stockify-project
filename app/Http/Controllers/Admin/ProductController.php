@@ -17,7 +17,9 @@ class ProductController extends Controller
         $products   = $this->service->getAllProducts();
         $categories = $this->service->getAllCategories();
         $suppliers  = $this->service->getAllSuppliers();
-        return view('admin.products.index', compact('products', 'categories', 'suppliers'));
+        $stockMap   = app(\App\Services\StockService::class)->getStockMap();
+    
+        return view('admin.products.index', compact('products', 'categories', 'suppliers', 'stockMap'));
     }
 
     public function create()

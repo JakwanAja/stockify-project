@@ -26,4 +26,6 @@ Route::prefix('manager')->name('manager.')->middleware(['auth', 'role:Manajer Gu
 // Staff routes
 Route::prefix('staff')->name('staff.')->middleware(['auth', 'role:Staff Gudang'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Staff\DashboardController::class, 'index'])->name('dashboard');
+      Route::get('/transaksi-masuk', [App\Http\Controllers\Staff\TransaksiMasukController::class, 'index'])->name('transaksi-masuk.index');
+      Route::post('/transaksi-masuk', [App\Http\Controllers\Staff\TransaksiMasukController::class, 'store'])->name('transaksi-masuk.store');
 });

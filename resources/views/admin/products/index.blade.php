@@ -35,7 +35,8 @@
                     <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Supplier</th>
                     <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Harga Beli</th>
                     <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Harga Jual</th>
-                    <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Min. Stok</th>
+                    <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">Min. Stok</th>
+                    <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">Stok</th>
                     <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">Aksi</th>
                 </tr>
             </thead>
@@ -76,6 +77,14 @@
                                 {{ $product->minimum_stock }}
                             </span>
                         </td>
+                        {{-- Cell Stok Aktual --}}
+                        <td class="px-5 py-3 text-center">
+                            @php $stok = $stockMap[$product->id] ?? 0; @endphp
+                            <span class="text-xs font-semibold px-2.5 py-1 rounded-full
+                                {{ $stok <= $product->minimum_stock ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-700' }}">
+                                {{ $stok }}
+                            </span>
+                        </td>
                         <td class="px-5 py-3 text-center">
                             <div class="flex items-center justify-center gap-2">
                                 <a href="{{ route('admin.products.edit', $product->id) }}"
@@ -102,7 +111,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="9" class="px-5 py-12 text-center text-gray-400">
+                        <td colspan="10" class="px-5 py-12 text-center text-gray-400">
                             <svg class="w-10 h-10 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
                             </svg>
@@ -182,6 +191,13 @@
                             min="0"
                             class="w-full px-4 py-2.5 text-sm border rounded-lg outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 {{ $errors->has('minimum_stock') ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-slate-50 focus:bg-white' }}">
                     </div>
+                    <td class="px-5 py-3 text-center">
+                        @php $stok = $stockMap[$product->id] ?? 0; @endphp
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full
+                            {{ $stok <= $product->minimum_stock ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-700' }}">
+                            {{ $stok }}
+                        </span>
+                    </td>
 
                     {{-- Kategori --}}
                     <div>

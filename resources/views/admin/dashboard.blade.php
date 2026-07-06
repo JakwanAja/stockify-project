@@ -22,7 +22,7 @@
         </div>
         <div>
             <p class="text-sm text-gray-500">Total Produk</p>
-            <p class="text-2xl font-bold text-gray-900">{{ $totalProducts }}</p>
+            <p class="text-2xl font-bold text-gray-900">{{ $summary['total_products'] }}</p>
         </div>
     </div>
 
@@ -54,16 +54,16 @@
         </div>
     </div>
 
-    {{-- Total Pengguna --}}
     <div class="bg-white rounded-xl border border-gray-200 p-5 flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0">
-            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+        <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
             </svg>
         </div>
         <div>
-            <p class="text-sm text-gray-500">Total Pengguna</p>
-            <p class="text-2xl font-bold text-gray-900">{{ $totalUsers }}</p>
+            <p class="text-sm text-gray-500">Stok Menipis</p>
+            <p class="text-2xl font-bold text-gray-900">{{ $summary['total_low_stock'] }}</p>
+            <p class="text-xs text-gray-400">Produk perlu restock</p>
         </div>
     </div>
 
