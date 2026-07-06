@@ -14,6 +14,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('suppliers', App\Http\Controllers\Admin\SupplierController::class);
     Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class)
+    ->only(['index', 'store', 'update', 'destroy']);
 });
 
 // Manager routes
