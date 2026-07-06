@@ -26,7 +26,7 @@ class StockTransactionService
         ]);
     }
 
-    // ===== Staff: Lihat transaksi masuk miliknya =====
+    // Staff: Lihat transaksi masuk miliknya
     public function getTransaksiMasukByStaff(int $userId)
     {
     return $this->repository->getByUserAndType($userId, 'Masuk');
@@ -44,12 +44,10 @@ class StockTransactionService
         return $this->repository->getByType('Masuk');
     }
 
-    // ===== Shared: Cari transaksi by ID =====
     public function findById(int $id)
     {
         return $this->repository->findById($id);
     }
-
     // ===== Manajer: Konfirmasi transaksi masuk =====
     public function konfirmasiMasuk(int $id)
     {
@@ -62,7 +60,6 @@ class StockTransactionService
         if ($transaction->type !== 'Masuk') {
             throw new \Exception('Transaksi bukan tipe Masuk.');
         }
-
         $this->repository->updateStatus($id, 'Diterima');
     }
 
