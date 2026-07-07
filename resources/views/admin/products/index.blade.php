@@ -122,17 +122,13 @@
             </tbody>
         </table>
     </div>
-
 </div>
 
 {{-- ===== MODAL CREATE PRODUK ===== --}}
 <div id="modal-create-product"
      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
 
-    {{-- Wrapper modal: flex-col agar header/body/footer bisa dipisah --}}
     <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl mx-4 max-h-[90vh] flex flex-col">
-
-        {{-- Modal Header — flex-shrink-0 agar tidak ikut scroll --}}
         <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 flex-shrink-0 rounded-t-2xl">
             <h3 class="text-lg font-semibold text-gray-900">Tambah Produk Baru</h3>
             <button onclick="closeCreateModal()" class="text-gray-400 hover:text-gray-600 transition">

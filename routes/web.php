@@ -23,6 +23,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
 // Manager routes
 Route::prefix('manager')->name('manager.')->middleware(['auth', 'role:Manajer Gudang'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Manager\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/products', [App\Http\Controllers\Manager\ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/{id}', [App\Http\Controllers\Manager\ProductController::class, 'show'])->name('products.show');
+    Route::get('/suppliers', [App\Http\Controllers\Manager\SupplierController::class, 'index'])->name('suppliers.index');
     Route::get('/transaksi-masuk', [App\Http\Controllers\Manager\TransaksiMasukController::class, 'index'])->name('transaksi-masuk.index');
     Route::post('/transaksi-masuk/{id}/konfirmasi', [App\Http\Controllers\Manager\TransaksiMasukController::class, 'konfirmasi'])->name('transaksi-masuk.konfirmasi');
     Route::post('/transaksi-masuk/{id}/tolak', [App\Http\Controllers\Manager\TransaksiMasukController::class, 'tolak'])->name('transaksi-masuk.tolak');
