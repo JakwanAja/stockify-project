@@ -15,7 +15,7 @@
 
             {{-- Logo --}}
             <div class="flex items-center gap-3 px-5 py-5 border-b border-gray-200">
-                <img src="{{ asset('images/seveninc_logo.png') }}" alt="Stockify" class="w-8 h-8 object-contain">
+                <img src="{{ asset('images/stokify_logo_circle.png') }}" alt="Stockify" class="w-8 h-8 object-contain">
                 <span class="text-xl font-bold text-gray-900">Stockify</span>
             </div>
             {{-- Navigation --}}

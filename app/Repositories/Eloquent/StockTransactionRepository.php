@@ -64,5 +64,32 @@ class StockTransactionRepository implements StockTransactionRepositoryInterface
         $transaction->update(['status' => $status]);
         return $transaction;
     }
+
+    public function getWithFilter(array $filters)
+    {
+        $query = StockTransaction::with(['product', 'user']);
+
+        if (!empty($filters['type'])) {
+            $query->where('type', $filters['type']);
+        }
+
+        if (!empty($filters['status'])) {
+            $query->where('status', $filters['status']);
+        }
+
+        if (!empty($filters['date_from'])) {
+            $query->whereDate('date', '>=', $filters['date_from']);
+        }
+
+        if (!empty($filters['date_to'])) {
+            $query->whereDate('date', '<=', $filters['date_to']);
+        }
+
+        if (!empty($filters['product_id'])) {
+            $query->where('product_id', $filters['product_id']);
+        }
+
+        return $query->latest('created_at')->get();
+    }
     
 }
