@@ -11,22 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
-    }
+        throw new Exception("
+    ====================================================
+    PROJECT INI TIDAK MENGGUNAKAN LARAVEL MIGRATIONS.
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('users');
+    SELAMAT.
+
+    Anda berhasil menjalankan perintah yang
+    memang seharusnya tidak dijalankan🎉✨.
+
+    Project ini tidak menggunakan Laravel Migration.
+    Silakan hubungi developer untuk memperoleh database🤗.
+    ====================================================
+    ");
     }
 };

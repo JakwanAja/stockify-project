@@ -112,73 +112,7 @@
             </table>
         </div>
     </div>
-
-    {{-- ===== RIWAYAT SEMUA TRANSAKSI MASUK ===== --}}
-    <div class="bg-white rounded-xl border border-gray-200">
-        <div class="px-5 py-4 border-b border-gray-200">
-            <h3 class="text-sm font-semibold text-gray-800">Riwayat Transaksi Masuk</h3>
-            <p class="text-xs text-gray-400 mt-0.5">Semua transaksi masuk yang pernah diajukan</p>
-        </div>
-
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left">
-                <thead class="bg-gray-50 border-b border-gray-200">
-                    <tr>
-                        <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">#</th>
-                        <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Produk</th>
-                        <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">Jumlah</th>
-                        <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Diajukan Oleh</th>
-                        <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Tanggal</th>
-                        <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Catatan</th>
-                        <th class="px-5 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">Status</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
-                    @forelse($allMasuk as $index => $trx)
-                        <tr class="hover:bg-gray-50 transition">
-                            <td class="px-5 py-3 text-gray-500">{{ $index + 1 }}</td>
-                            <td class="px-5 py-3">
-                                <p class="font-medium text-gray-800">{{ $trx->product->name ?? '—' }}</p>
-                                <p class="text-xs text-gray-400">{{ $trx->product->sku ?? '' }}</p>
-                            </td>
-                            <td class="px-5 py-3 text-center font-semibold text-green-600">
-                                +{{ $trx->quantity }}
-                            </td>
-                            <td class="px-5 py-3 text-gray-600 text-xs">{{ $trx->user->name ?? '—' }}</td>
-                            <td class="px-5 py-3 text-gray-500 text-xs">
-                                {{ $trx->date ? $trx->date->format('d M Y') : '—' }}
-                            </td>
-                            <td class="px-5 py-3 text-gray-500 text-xs max-w-xs truncate">
-                                {{ $trx->notes ?? '—' }}
-                            </td>
-                            <td class="px-5 py-3 text-center">
-                                @php
-                                    $statusColor = match($trx->status) {
-                                        'Pending'  => 'bg-yellow-100 text-yellow-700',
-                                        'Diterima' => 'bg-green-100 text-green-700',
-                                        'Ditolak'  => 'bg-red-100 text-red-700',
-                                        default    => 'bg-gray-100 text-gray-600',
-                                    };
-                                @endphp
-                                <span class="text-xs font-medium px-2.5 py-1 rounded-full {{ $statusColor }}">
-                                    {{ $trx->status }}
-                                </span>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="7" class="px-5 py-10 text-center text-gray-400 text-sm">
-                                Belum ada riwayat transaksi masuk.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-</div>
-
+    
 {{-- ===== MODAL KONFIRMASI TERIMA ===== --}}
 <div id="modal-konfirmasi"
      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">

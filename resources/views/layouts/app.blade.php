@@ -12,7 +12,6 @@
     <div class="flex h-screen overflow-hidden">
         {{-- Sidebar --}}
         <aside class="w-64 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col h-full overflow-y-auto">
-
             {{-- Logo --}}
             <div class="flex items-center gap-3 px-5 py-5 border-b border-gray-200">
                 <img src="{{ asset('images/stokify_logo_circle.png') }}" alt="Stockify" class="w-8 h-8 object-contain">

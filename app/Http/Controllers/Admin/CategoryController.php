@@ -71,7 +71,6 @@ class CategoryController extends Controller
                 ->withInput()
                 ->with('edit_mode', true)
                 ->with('edit_id', $id);
-            // Flash edit_mode + edit_id → blade akan buka modal EDIT
         }
 
         $this->service->updateCategory($id, $request->all());
