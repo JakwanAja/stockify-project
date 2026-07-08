@@ -54,10 +54,20 @@
     Riwayat Transaksi
 </a>
 
-<a href="#"
-   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+<a href="{{ route('manager.laporan.stok') }}"
+   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
+          {{ request()->routeIs('manager.laporan.stok*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900' }}">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
     </svg>
-    Laporan
+    Laporan Stok
+</a>
+
+<a href="{{ route('manager.laporan.transaksi') }}"
+   class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition
+          {{ request()->routeIs('manager.laporan.transaksi*') ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900' }}">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+    </svg>
+    Laporan Transaksi
 </a>

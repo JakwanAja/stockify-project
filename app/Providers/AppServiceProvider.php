@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProductAttributeRepositoryInterface::class, ProductAttributeRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(StockTransactionRepositoryInterface::class, StockTransactionRepository::class);
-
+        $this->app->singleton(\App\Services\LaporanService::class);
         $this->app->singleton(\App\Services\StockService::class);
     }
 

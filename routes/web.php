@@ -2,13 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Public routes
+// -- Auth Route (All Role) --
 Route::get('/', fn() => redirect()->route('login'));
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showForm'])->name('login');
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.post');
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
-// Admin routes
+// -- Admin routes --
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
@@ -17,10 +17,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::resource('users', App\Http\Controllers\Admin\UserController::class)
     ->only(['index', 'store', 'update', 'destroy']);
     Route::get('/riwayat-transaksi', [App\Http\Controllers\Admin\RiwayatTransaksiController::class, 'index'])->name('riwayat-transaksi.index');
-
+    Route::get('/laporan/stok', [App\Http\Controllers\Admin\LaporanController::class, 'stok'])->name('laporan.stok');
+    Route::get('/laporan/stok/pdf', [App\Http\Controllers\Admin\LaporanController::class, 'stokPdf'])->name('laporan.stok.pdf');
+    Route::get('/laporan/transaksi', [App\Http\Controllers\Admin\LaporanController::class, 'transaksi'])->name('laporan.transaksi');
+    Route::get('/laporan/transaksi/pdf', [App\Http\Controllers\Admin\LaporanController::class, 'transaksiPdf'])->name('laporan.transaksi.pdf');
 });
 
-// Manager routes
+// -- Manager routes --
 Route::prefix('manager')->name('manager.')->middleware(['auth', 'role:Manajer Gudang'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Manager\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/products', [App\Http\Controllers\Manager\ProductController::class, 'index'])->name('products.index');
@@ -33,9 +36,13 @@ Route::prefix('manager')->name('manager.')->middleware(['auth', 'role:Manajer Gu
     Route::post('/transaksi-keluar/{id}/konfirmasi', [App\Http\Controllers\Manager\TransaksiKeluarController::class, 'konfirmasi'])->name('transaksi-keluar.konfirmasi');
     Route::post('/transaksi-keluar/{id}/tolak', [App\Http\Controllers\Manager\TransaksiKeluarController::class, 'tolak'])->name('transaksi-keluar.tolak');
     Route::get('/riwayat-transaksi', [App\Http\Controllers\Manager\RiwayatTransaksiController::class, 'index'])->name('riwayat-transaksi.index');
+    Route::get('/laporan/stok', [App\Http\Controllers\Manager\LaporanController::class, 'stok'])->name('laporan.stok');
+    Route::get('/laporan/stok/pdf', [App\Http\Controllers\Manager\LaporanController::class, 'stokPdf'])->name('laporan.stok.pdf');
+    Route::get('/laporan/transaksi', [App\Http\Controllers\Manager\LaporanController::class, 'transaksi'])->name('laporan.transaksi');
+    Route::get('/laporan/transaksi/pdf', [App\Http\Controllers\Manager\LaporanController::class, 'transaksiPdf'])->name('laporan.transaksi.pdf');
 });
 
-// Staff routes
+// -- Staff routes --
 Route::prefix('staff')->name('staff.')->middleware(['auth', 'role:Staff Gudang'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\Staff\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/transaksi-masuk', [App\Http\Controllers\Staff\TransaksiMasukController::class, 'index'])->name('transaksi-masuk.index');
