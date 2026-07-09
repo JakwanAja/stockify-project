@@ -11,27 +11,13 @@
 ![License](https://img.shields.io/badge/license-Academic-blue)
 
 </div>
-
-<!-- 🖼️ PLACEHOLDER: Tambahkan screenshot utama / banner aplikasi di sini -->
-<!-- ![Stockify Banner](docs/images/banner.png) -->
-
 ---
 
 ## 🧾 Tentang Project
 
 **Stockify** adalah aplikasi web manajemen stok gudang yang dikembangkan untuk menggantikan pencatatan manual yang rentan terhadap kesalahan manusia, tidak efisien, dan sulit diaudit. 
 
-Aplikasi ini mencakup tiga modul utama:
-
-| Modul | Cakupan |
-|---|---|
-| **Manajemen Data Master** | Kategori, supplier, produk, dan pengguna |
-| **Manajemen Transaksi Stok** | Barang masuk dan keluar dengan alur konfirmasi multi-role |
-| **Pelaporan & Analitik** | Laporan stok dan transaksi dengan fitur ekspor PDF |
-
-<!-- 🖼️ PLACEHOLDER: Tambahkan screenshot dashboard admin di sini -->
-<!-- ![Dashboard Admin](docs/images/dashboard-admin.png) -->
-
+![Stockify Banner](screenshots/admin_dashboard.png) 
 ---
 
 ## ✨ Fitur Utama
@@ -59,7 +45,7 @@ Aplikasi ini mencakup tiga modul utama:
 ## 🧰 Teknologi & Arsitektur
 
 | Layer | Teknologi | Versi | 
-|---|---|---|---|
+|---|---|---|
 | Backend Framework | Laravel | 10.x | 
 | Bahasa Pemrograman | PHP | 8.2+ | 
 | Database | MySQL | 8.x | 
@@ -70,7 +56,7 @@ Aplikasi ini mencakup tiga modul utama:
 | Design Tool | MySQL Workbench | Latest | 
 | Version Control | Git + GitHub | — | 
 
-Stockify menerapkan pola arsitektur **Controller-Service-Repository** yang memisahkan tanggung jawab tiap layer secara tegas
+> Stockify menerapkan pola arsitektur **Controller-Service-Repository** yang memisahkan tanggung jawab tiap layer secara tegas.
 ---
 `.
 
@@ -99,13 +85,10 @@ stockify/
 ├── routes/
 │   └── web.php
 ├── database/
-│   └── (skema dikelola via MySQL Workbench, lihat catatan database-first)
+│   └── (skema dikelola via MySQL Workbench)
 ├── public/
 └── .env.example
 ```
-
-> Struktur di atas mengikuti pola default Laravel dengan pemisahan direktori Controller dan View per role (`Admin`, `Manager`, `Staff`) sesuai prinsip *role isolation*.
-
 
 ## 💻 Kebutuhan Sistem
 
@@ -122,7 +105,7 @@ stockify/
 
 ## ⚙️ Instalasi & Konfigurasi
 
-> ⚠️ Karena Stockify menggunakan pendekatan **database-first**, pastikan skema database sudah tersedia. Dapatkan database dengan meminta izin ke pengembang.
+> ⚠️ Karena Stockify menggunakan pendekatan **database-first**, pastikan skema database sudah tersedia. Dapatkan database dengan meminta izin ke **Pengembang**.
 
 ### 1. Clone Repository
 
@@ -180,16 +163,8 @@ php artisan serve
 ```
 Aplikasi dapat diakses melalui `http://127.0.0.1:8000`.
 
-<!-- 🖼️ PLACEHOLDER: Tambahkan screenshot halaman login di sini -->
-<!-- ![Halaman Login](docs/images/login.png) -->
 
----
-
-## 🔁 Alur Bisnis Utama
-
-
-<!-- 🖼️ PLACEHOLDER: Tambahkan diagram alur transaksi (flowchart) di sini -->
-<!-- ![Alur Transaksi Barang Masuk](docs/images/alur-transaksi-masuk.png) -->
+ ![Stockify Banner](screenshots/loginpage.png) 
 
 ---
 
