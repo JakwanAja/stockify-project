@@ -90,7 +90,7 @@
                     <div class="relative">
                         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400 font-medium">Rp</span>
                         <input type="number" id="purchase_price" name="purchase_price" value="{{ old('purchase_price', $product->purchase_price) }}"
-                            min="0" step="100"
+                            min="0" step="1"
                             class="w-full pl-10 pr-4 py-2.5 text-sm border rounded-lg outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 border-gray-200 bg-slate-50 focus:bg-white">
                     </div>
                     @error('purchase_price') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror
@@ -104,7 +104,7 @@
                     <div class="relative">
                         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400 font-medium">Rp</span>
                         <input type="number" id="selling_price" name="selling_price" value="{{ old('selling_price', $product->selling_price) }}"
-                            min="0" step="100"
+                            min="0" step="1"
                             class="w-full pl-10 pr-4 py-2.5 text-sm border rounded-lg outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 border-gray-200 bg-slate-50 focus:bg-white">
                     </div>
                     @error('selling_price') <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p> @enderror

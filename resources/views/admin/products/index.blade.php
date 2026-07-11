@@ -187,13 +187,6 @@
                             min="0"
                             class="w-full px-4 py-2.5 text-sm border rounded-lg outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 {{ $errors->has('minimum_stock') ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-slate-50 focus:bg-white' }}">
                     </div>
-                    <td class="px-5 py-3 text-center">
-                        @php $stok = $stockMap[$product->id] ?? 0; @endphp
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full
-                            {{ $stok <= $product->minimum_stock ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-700' }}">
-                            {{ $stok }}
-                        </span>
-                    </td>
 
                     {{-- Kategori --}}
                     <div>
@@ -235,7 +228,7 @@
                         <div class="relative">
                             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400 font-medium">Rp</span>
                             <input type="number" id="purchase_price" name="purchase_price" value="{{ old('purchase_price') }}"
-                                min="0" step="100" placeholder="0"
+                                min="0" step="1" placeholder="0"
                                 class="w-full pl-10 pr-4 py-2.5 text-sm border rounded-lg outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 {{ $errors->has('purchase_price') ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-slate-50 focus:bg-white' }}">
                         </div>
                     </div>
@@ -248,7 +241,7 @@
                         <div class="relative">
                             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400 font-medium">Rp</span>
                             <input type="number" id="selling_price" name="selling_price" value="{{ old('selling_price') }}"
-                                min="0" step="100" placeholder="0"
+                                min="0" step="1" placeholder="0"
                                 class="w-full pl-10 pr-4 py-2.5 text-sm border rounded-lg outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 {{ $errors->has('selling_price') ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-slate-50 focus:bg-white' }}">
                         </div>
                     </div>

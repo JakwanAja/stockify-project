@@ -30,8 +30,8 @@ class SupplierController extends Controller
         $validator = Validator::make($request->all(), [
             'name'    => 'required|string|max:45|unique:suppliers,name',
             'address' => 'nullable|string',
-            'phone'   => 'nullable|string|max:15',
             'email'   => 'nullable|email|max:45|unique:suppliers,email',
+            'phone'   => 'nullable|numeric', 
         ], [
             'name.required' => 'Nama supplier wajib diisi.',
             'name.unique'   => 'Nama supplier sudah terdaftar.',
@@ -39,6 +39,7 @@ class SupplierController extends Controller
             'phone.max'     => 'Nomor telepon maksimal 15 karakter.',
             'email.email'   => 'Format email tidak valid.',
             'email.unique'  => 'Email supplier sudah terdaftar.',
+            'phone.numeric' => 'Nomor telepon hanya boleh berisi angka.',
         ]);
 
         if ($validator->fails()) {
